@@ -1,9 +1,11 @@
+use crate::components::text::{OwnedText, OwnedSection};
 use crate::components::core::{image::Handle, shapes::Rectangle};
 use crate::components::layer::{self, LayerBrush};
 use crate::components::rect::{Rect, RectBrush};
 use crate::components::text;
 use crate::context::Context;
-use crate::core::{ImageProperties, RepeatedSugar, Sugar, SugarStack};
+use crate::primitives::{media::ImageProperties, utils::RepeatedSugar};
+use crate::primitives::{SugarStack, Sugar};
 use crate::font::fonts::{SugarloafFont, SugarloafFonts};
 #[cfg(not(target_arch = "wasm32"))]
 use crate::font::loader::Database;
@@ -48,8 +50,14 @@ pub struct CachedSugar {
     monospaced_font_scale: Option<f32>,
 }
 
+pub struct CachedSugarStack {
+    rects: Vec<Rect>,
+    sections: Vec<OwnedSection>
+}
+
 pub struct Sugarloaf {
     sugar_cache: HashMap<char, CachedSugar>,
+    sugar_stack_cache: HashMap<String, CachedSugarStack>,
     pub ctx: Context,
     pub layout: SugarloafLayout,
     text_brush: text::GlyphBrush<()>,
@@ -107,6 +115,7 @@ impl Sugarloaf {
 
         let instance = Sugarloaf {
             sugar_cache: HashMap::new(),
+            sugar_stack_cache: HashMap::new(),
             layer_brush,
             fonts,
             ctx,
@@ -313,8 +322,27 @@ impl Sugarloaf {
 
     #[inline]
     pub fn stack(&mut self, mut stack: SugarStack) {
+        // println!("id: {}", stack.id);
+        // println!("len: {}", stack.id.len());
+
+        if let Some(cached_sugar_stack) = self.sugar_stack_cache.get(&stack.id) {
+            // println!("achou from cache");
+
+            for section in &cached_sugar_stack.sections {
+                self.text_brush.queue(&*section);
+            }
+
+            for rect in &cached_sugar_stack.rects {
+                self.rects.push(*rect);
+            }
+
+            self.text_y += self.layout.scaled_sugarheight;
+            return;
+        }
+
         let mut x = 0.;
         let mut sections = vec![];
+        let mut rects = vec![];
         let mod_pos_y = self.layout.style.screen_position.1;
         let mod_text_y = self.layout.scaled_sugarheight / 2.;
 
@@ -343,7 +371,11 @@ impl Sugarloaf {
                 && stack[i].decoration.is_none()
                 && stack[i + 1].decoration.is_none()
             {
-                repeated.set(&stack[i], rect_pos_x, mod_text_y + self.text_y + mod_pos_y);
+                repeated.set(
+                    &stack[i],
+                    rect_pos_x,
+                    mod_text_y + self.text_y + mod_pos_y,
+                );
                 x += add_pos_x;
                 continue;
             }
@@ -399,7 +431,7 @@ impl Sugarloaf {
                 stack[i].background_color
             };
 
-            let text = crate::components::text::OwnedText {
+            let text = OwnedText {
                 text: sugar_str,
                 scale: PxScale::from(scale),
                 font_id,
@@ -421,7 +453,7 @@ impl Sugarloaf {
                 mod_text_y + self.text_y + mod_pos_y
             };
 
-            let section = crate::components::text::OwnedSection {
+            let section = OwnedSection {
                 screen_position: (section_pos_x, section_pos_y),
                 bounds: (width_bound * quantity as f32, text_bound),
                 text: vec![text],
@@ -434,7 +466,7 @@ impl Sugarloaf {
 
             let scaled_rect_pos_x = section_pos_x / self.ctx.scale;
             let scaled_rect_pos_y = rect_pos_y / self.ctx.scale;
-            self.rects.push(Rect {
+            rects.push(Rect {
                 position: [scaled_rect_pos_x, scaled_rect_pos_y],
                 color: bg_color,
                 size: [width_bound * quantity as f32, self.layout.sugarheight],
@@ -443,7 +475,7 @@ impl Sugarloaf {
             if let Some(decoration) = &stack[i].decoration {
                 let dec_pos_y = (scaled_rect_pos_y)
                     + (decoration.relative_position.1 * self.layout.line_height);
-                self.rects.push(Rect {
+                rects.push(Rect {
                     position: [
                         (scaled_rect_pos_x
                             + (add_pos_x * decoration.relative_position.0)
@@ -465,9 +497,19 @@ impl Sugarloaf {
             x += add_pos_x;
         }
 
-        for section in sections {
-            self.text_brush.queue(&section);
+        for section in &sections {
+            self.text_brush.queue(&*section);
         }
+
+        for rect in &rects {
+            self.rects.push(*rect);
+        }
+
+        self.sugar_stack_cache.insert(stack.id, CachedSugarStack {
+            rects,
+            sections,
+        });
+
         self.text_y += self.layout.scaled_sugarheight;
     }
 

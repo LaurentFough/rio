@@ -1,6 +1,6 @@
 use crate::defaults::*;
 use serde::{Deserialize, Serialize};
-use sugarloaf::core::ImageProperties;
+use sugarloaf::primitives::media::ImageProperties;
 
 #[derive(Default, Clone, Serialize, Deserialize, Copy, Debug, PartialEq)]
 pub enum WindowMode {

@@ -1,5 +1,5 @@
 use crate::components::layer::types;
-use crate::core::SugarloafStyle;
+use crate::primitives::style::SugarloafStyle;
 
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
 pub struct Delta<T: Default> {

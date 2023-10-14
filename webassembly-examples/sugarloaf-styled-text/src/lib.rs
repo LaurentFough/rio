@@ -1,8 +1,9 @@
 use sugarloaf::Sugarloaf;
 use sugarloaf::{
-    core::{Sugar, SugarDecoration, SugarStyle},
+    primitives::{Sugar, SugarStack},
     layout::SugarloafLayout,
 };
+use sugarloaf::primitives::style::{SugarDecoration, SugarStyle};
 use wasm_bindgen::prelude::*;
 
 use winit::{
@@ -79,392 +80,388 @@ async fn run() {
     let _ = event_loop.run(move |event, _, control_flow| {
         control_flow.set_wait();
 
-        let sugar = vec![
-            Sugar {
-                content: 'u',
-                foreground_color: [1.0, 1.0, 1.0, 1.0],
-                background_color: [0.0, 0.0, 0.0, 1.0],
-                style: None,
-                decoration: Some(SugarDecoration {
-                    relative_position: (0.0, 58.),
-                    size: (1.0, 0.050),
-                    color: [0.0, 0.0, 0.0, 1.0],
-                }),
-            },
-            Sugar {
-                content: 'n',
-                foreground_color: [0.0, 0.0, 0.0, 1.0],
-                background_color: [1.0, 1.0, 1.0, 1.0],
-                style: None,
-                decoration: Some(SugarDecoration {
-                    relative_position: (0.0, 58.),
-                    size: (1.0, 0.025),
-                    color: [0.0, 0.0, 0.0, 1.0],
-                }),
-            },
-            Sugar {
-                content: 'd',
-                foreground_color: [1.0, 1.0, 1.0, 1.0],
-                background_color: [0.0, 0.0, 0.0, 1.0],
-                style: None,
-                decoration: Some(SugarDecoration {
-                    relative_position: (0.0, 58.),
-                    size: (1.0, 0.025),
-                    color: [0.0, 0.0, 0.0, 1.0],
-                }),
-            },
-            Sugar {
-                content: 'e',
-                foreground_color: [0.0, 0.0, 0.0, 1.0],
-                background_color: [1.0, 1.0, 1.0, 1.0],
-                style: None,
-                decoration: Some(SugarDecoration {
-                    relative_position: (0.0, 58.),
-                    size: (1.0, 0.025),
-                    color: [0.0, 0.0, 0.0, 1.0],
-                }),
-            },
-            Sugar {
-                content: 'r',
-                foreground_color: [1.0, 1.0, 1.0, 1.0],
-                background_color: [0.0, 0.0, 0.0, 1.0],
-                style: None,
-                decoration: Some(SugarDecoration {
-                    relative_position: (0.0, 58.),
-                    size: (1.0, 0.025),
-                    color: [0.0, 0.0, 0.0, 1.0],
-                }),
-            },
-            Sugar {
-                content: 'l',
-                foreground_color: [0.0, 0.0, 0.0, 1.0],
-                background_color: [0.0, 0.0, 1.0, 1.0],
-                style: None,
-                decoration: Some(SugarDecoration {
-                    relative_position: (0.0, 58.),
-                    size: (1.0, 0.025),
-                    color: [0.0, 0.0, 0.0, 1.0],
-                }),
-            },
-            Sugar {
-                content: '!',
-                foreground_color: [0.0, 0.0, 0.0, 1.0],
-                background_color: [0.0, 0.0, 1.0, 1.0],
-                style: None,
-                decoration: None,
-            },
-            Sugar {
-                content: 'i',
-                foreground_color: [0.0, 0.0, 0.0, 1.0],
-                background_color: [1.0, 1.0, 1.0, 1.0],
-                style: None,
-                decoration: Some(SugarDecoration {
-                    relative_position: (0.0, 58.),
-                    size: (1.0, 0.025),
-                    color: [0.0, 0.0, 0.0, 1.0],
-                }),
-            },
-            Sugar {
-                content: 'n',
-                foreground_color: [0.0, 0.0, 0.0, 1.0],
-                background_color: [1.0, 1.0, 1.0, 1.0],
-                style: None,
-                decoration: Some(SugarDecoration {
-                    relative_position: (0.0, 58.),
-                    size: (1.0, 0.025),
-                    color: [0.0, 0.0, 0.0, 1.0],
-                }),
-            },
-            Sugar {
-                content: 'e',
-                foreground_color: [0.0, 0.0, 0.0, 1.0],
-                background_color: [1.0, 1.0, 1.0, 1.0],
-                style: None,
-                decoration: Some(SugarDecoration {
-                    relative_position: (0.0, 58.),
-                    size: (1.0, 0.025),
-                    color: [0.0, 0.0, 0.0, 1.0],
-                }),
-            },
-            Sugar {
-                content: ' ',
-                foreground_color: [0.0, 0.0, 0.0, 1.0],
-                background_color: [1.0, 1.0, 1.0, 1.0],
-                style: None,
-                decoration: Some(SugarDecoration {
-                    relative_position: (0.0, 58.),
-                    size: (1.0, 0.025),
-                    color: [0.0, 0.0, 0.0, 1.0],
-                }),
-            },
-            Sugar {
-                content: ' ',
-                foreground_color: [0.0, 0.0, 0.0, 1.0],
-                background_color: [1.0, 1.0, 1.0, 1.0],
-                style: None,
-                decoration: Some(SugarDecoration {
-                    relative_position: (0.0, 58.),
-                    size: (1.0, 0.025),
-                    color: [0.0, 0.0, 0.0, 1.0],
-                }),
-            },
-            Sugar {
-                content: ' ',
-                foreground_color: [0.0, 0.0, 0.0, 1.0],
-                background_color: [1.0, 1.0, 1.0, 1.0],
-                style: None,
-                decoration: None,
-            },
-        ];
+        let mut sugar = SugarStack::new();
+        sugar.add(Sugar {
+            content: 'u',
+            foreground_color: [1.0, 1.0, 1.0, 1.0],
+            background_color: [0.0, 0.0, 0.0, 1.0],
+            style: None,
+            decoration: Some(SugarDecoration {
+                relative_position: (0.0, 58.),
+                size: (1.0, 0.050),
+                color: [0.0, 0.0, 0.0, 1.0],
+            }),
+        });
+        sugar.add(Sugar {
+            content: 'n',
+            foreground_color: [0.0, 0.0, 0.0, 1.0],
+            background_color: [1.0, 1.0, 1.0, 1.0],
+            style: None,
+            decoration: Some(SugarDecoration {
+                relative_position: (0.0, 58.),
+                size: (1.0, 0.025),
+                color: [0.0, 0.0, 0.0, 1.0],
+            }),
+        });
+        sugar.add(Sugar {
+            content: 'd',
+            foreground_color: [1.0, 1.0, 1.0, 1.0],
+            background_color: [0.0, 0.0, 0.0, 1.0],
+            style: None,
+            decoration: Some(SugarDecoration {
+                relative_position: (0.0, 58.),
+                size: (1.0, 0.025),
+                color: [0.0, 0.0, 0.0, 1.0],
+            }),
+        });
+        sugar.add(Sugar {
+            content: 'e',
+            foreground_color: [0.0, 0.0, 0.0, 1.0],
+            background_color: [1.0, 1.0, 1.0, 1.0],
+            style: None,
+            decoration: Some(SugarDecoration {
+                relative_position: (0.0, 58.),
+                size: (1.0, 0.025),
+                color: [0.0, 0.0, 0.0, 1.0],
+            }),
+        });
+        sugar.add(Sugar {
+            content: 'r',
+            foreground_color: [1.0, 1.0, 1.0, 1.0],
+            background_color: [0.0, 0.0, 0.0, 1.0],
+            style: None,
+            decoration: Some(SugarDecoration {
+                relative_position: (0.0, 58.),
+                size: (1.0, 0.025),
+                color: [0.0, 0.0, 0.0, 1.0],
+            }),
+        });
+        sugar.add(Sugar {
+            content: 'l',
+            foreground_color: [0.0, 0.0, 0.0, 1.0],
+            background_color: [0.0, 0.0, 1.0, 1.0],
+            style: None,
+            decoration: Some(SugarDecoration {
+                relative_position: (0.0, 58.),
+                size: (1.0, 0.025),
+                color: [0.0, 0.0, 0.0, 1.0],
+            }),
+        });
+        sugar.add(Sugar {
+            content: '!',
+            foreground_color: [0.0, 0.0, 0.0, 1.0],
+            background_color: [0.0, 0.0, 1.0, 1.0],
+            style: None,
+            decoration: None,
+        });
+        sugar.add(Sugar {
+            content: 'i',
+            foreground_color: [0.0, 0.0, 0.0, 1.0],
+            background_color: [1.0, 1.0, 1.0, 1.0],
+            style: None,
+            decoration: Some(SugarDecoration {
+                relative_position: (0.0, 58.),
+                size: (1.0, 0.025),
+                color: [0.0, 0.0, 0.0, 1.0],
+            }),
+        });
+        sugar.add(Sugar {
+            content: 'n',
+            foreground_color: [0.0, 0.0, 0.0, 1.0],
+            background_color: [1.0, 1.0, 1.0, 1.0],
+            style: None,
+            decoration: Some(SugarDecoration {
+                relative_position: (0.0, 58.),
+                size: (1.0, 0.025),
+                color: [0.0, 0.0, 0.0, 1.0],
+            }),
+        });
+        sugar.add(Sugar {
+            content: 'e',
+            foreground_color: [0.0, 0.0, 0.0, 1.0],
+            background_color: [1.0, 1.0, 1.0, 1.0],
+            style: None,
+            decoration: Some(SugarDecoration {
+                relative_position: (0.0, 58.),
+                size: (1.0, 0.025),
+                color: [0.0, 0.0, 0.0, 1.0],
+            }),
+        });
+        sugar.add(Sugar {
+            content: ' ',
+            foreground_color: [0.0, 0.0, 0.0, 1.0],
+            background_color: [1.0, 1.0, 1.0, 1.0],
+            style: None,
+            decoration: Some(SugarDecoration {
+                relative_position: (0.0, 58.),
+                size: (1.0, 0.025),
+                color: [0.0, 0.0, 0.0, 1.0],
+            }),
+        });
+        sugar.add(Sugar {
+            content: ' ',
+            foreground_color: [0.0, 0.0, 0.0, 1.0],
+            background_color: [1.0, 1.0, 1.0, 1.0],
+            style: None,
+            decoration: Some(SugarDecoration {
+                relative_position: (0.0, 58.),
+                size: (1.0, 0.025),
+                color: [0.0, 0.0, 0.0, 1.0],
+            }),
+        });
+        sugar.add(Sugar {
+            content: ' ',
+            foreground_color: [0.0, 0.0, 0.0, 1.0],
+            background_color: [1.0, 1.0, 1.0, 1.0],
+            style: None,
+            decoration: None,
+        });
 
-        let italic_and_bold = vec![
-            Sugar {
-                content: 'i',
-                foreground_color: [0.0, 0.0, 0.0, 1.0],
-                background_color: [1.0, 1.0, 1.0, 1.0],
-                style: Some(SugarStyle {
-                    is_italic: true,
-                    is_bold_italic: false,
-                    is_bold: false,
-                }),
-                decoration: None,
-            },
-            Sugar {
-                content: 't',
-                foreground_color: [0.0, 0.0, 0.0, 1.0],
-                background_color: [1.0, 1.0, 1.0, 1.0],
-                style: Some(SugarStyle {
-                    is_italic: true,
-                    is_bold_italic: false,
-                    is_bold: false,
-                }),
-                decoration: None,
-            },
-            Sugar {
-                content: 'a',
-                foreground_color: [0.0, 0.0, 0.0, 1.0],
-                background_color: [1.0, 1.0, 1.0, 1.0],
-                style: Some(SugarStyle {
-                    is_italic: true,
-                    is_bold_italic: false,
-                    is_bold: false,
-                }),
-                decoration: None,
-            },
-            Sugar {
-                content: 'l',
-                foreground_color: [0.0, 0.0, 0.0, 1.0],
-                background_color: [1.0, 1.0, 1.0, 1.0],
-                style: Some(SugarStyle {
-                    is_italic: true,
-                    is_bold_italic: false,
-                    is_bold: false,
-                }),
-                decoration: None,
-            },
-            Sugar {
-                content: 'i',
-                foreground_color: [0.0, 0.0, 0.0, 1.0],
-                background_color: [1.0, 1.0, 1.0, 1.0],
-                style: Some(SugarStyle {
-                    is_italic: true,
-                    is_bold_italic: false,
-                    is_bold: false,
-                }),
-                decoration: None,
-            },
-            Sugar {
-                content: 'c',
-                foreground_color: [0.0, 0.0, 0.0, 1.0],
-                background_color: [1.0, 1.0, 1.0, 1.0],
-                style: Some(SugarStyle {
-                    is_italic: true,
-                    is_bold_italic: false,
-                    is_bold: false,
-                }),
-                decoration: None,
-            },
-            Sugar {
-                content: ' ',
-                foreground_color: [0.0, 0.0, 0.0, 1.0],
-                background_color: [0.5, 0.5, 1.0, 1.0],
-                style: Some(SugarStyle {
-                    is_italic: false,
-                    is_bold_italic: false,
-                    is_bold: true,
-                }),
-                decoration: None,
-            },
-            Sugar {
-                content: 'b',
-                foreground_color: [0.0, 0.0, 0.0, 1.0],
-                background_color: [1.0, 1.0, 0.3, 1.0],
-                style: Some(SugarStyle {
-                    is_italic: false,
-                    is_bold_italic: false,
-                    is_bold: true,
-                }),
-                decoration: None,
-            },
-            Sugar {
-                content: 'o',
-                foreground_color: [0.0, 0.0, 0.0, 1.0],
-                background_color: [1.0, 1.0, 0.3, 1.0],
-                style: Some(SugarStyle {
-                    is_italic: false,
-                    is_bold_italic: false,
-                    is_bold: true,
-                }),
-                decoration: None,
-            },
-            Sugar {
-                content: 'l',
-                foreground_color: [0.0, 0.0, 0.0, 1.0],
-                background_color: [1.0, 1.0, 0.3, 1.0],
-                style: Some(SugarStyle {
-                    is_italic: false,
-                    is_bold_italic: false,
-                    is_bold: true,
-                }),
-                decoration: None,
-            },
-            Sugar {
-                content: 'd',
-                foreground_color: [0.0, 0.0, 0.0, 1.0],
-                background_color: [1.0, 1.0, 0.3, 1.0],
-                style: Some(SugarStyle {
-                    is_italic: false,
-                    is_bold_italic: false,
-                    is_bold: true,
-                }),
-                decoration: None,
-            },
-        ];
+        let mut italic_and_bold = SugarStack::new();
+        italic_and_bold.add(Sugar {
+            content: 'i',
+            foreground_color: [0.0, 0.0, 0.0, 1.0],
+            background_color: [1.0, 1.0, 1.0, 1.0],
+            style: Some(SugarStyle {
+                is_italic: true,
+                is_bold_italic: false,
+                is_bold: false,
+            }),
+            decoration: None,
+        });
+        italic_and_bold.add(Sugar {
+            content: 't',
+            foreground_color: [0.0, 0.0, 0.0, 1.0],
+            background_color: [1.0, 1.0, 1.0, 1.0],
+            style: Some(SugarStyle {
+                is_italic: true,
+                is_bold_italic: false,
+                is_bold: false,
+            }),
+            decoration: None,
+        });
+        italic_and_bold.add(Sugar {
+            content: 'a',
+            foreground_color: [0.0, 0.0, 0.0, 1.0],
+            background_color: [1.0, 1.0, 1.0, 1.0],
+            style: Some(SugarStyle {
+                is_italic: true,
+                is_bold_italic: false,
+                is_bold: false,
+            }),
+            decoration: None,
+        });
+        italic_and_bold.add(Sugar {
+            content: 'l',
+            foreground_color: [0.0, 0.0, 0.0, 1.0],
+            background_color: [1.0, 1.0, 1.0, 1.0],
+            style: Some(SugarStyle {
+                is_italic: true,
+                is_bold_italic: false,
+                is_bold: false,
+            }),
+            decoration: None,
+        });
+        italic_and_bold.add(Sugar {
+            content: 'i',
+            foreground_color: [0.0, 0.0, 0.0, 1.0],
+            background_color: [1.0, 1.0, 1.0, 1.0],
+            style: Some(SugarStyle {
+                is_italic: true,
+                is_bold_italic: false,
+                is_bold: false,
+            }),
+            decoration: None,
+        });
+        italic_and_bold.add(Sugar {
+            content: 'c',
+            foreground_color: [0.0, 0.0, 0.0, 1.0],
+            background_color: [1.0, 1.0, 1.0, 1.0],
+            style: Some(SugarStyle {
+                is_italic: true,
+                is_bold_italic: false,
+                is_bold: false,
+            }),
+            decoration: None,
+        });
+        italic_and_bold.add(Sugar {
+            content: ' ',
+            foreground_color: [0.0, 0.0, 0.0, 1.0],
+            background_color: [0.5, 0.5, 1.0, 1.0],
+            style: Some(SugarStyle {
+                is_italic: false,
+                is_bold_italic: false,
+                is_bold: true,
+            }),
+            decoration: None,
+        });
+        italic_and_bold.add(Sugar {
+            content: 'b',
+            foreground_color: [0.0, 0.0, 0.0, 1.0],
+            background_color: [1.0, 1.0, 0.3, 1.0],
+            style: Some(SugarStyle {
+                is_italic: false,
+                is_bold_italic: false,
+                is_bold: true,
+            }),
+            decoration: None,
+        });
+        italic_and_bold.add(Sugar {
+            content: 'o',
+            foreground_color: [0.0, 0.0, 0.0, 1.0],
+            background_color: [1.0, 1.0, 0.3, 1.0],
+            style: Some(SugarStyle {
+                is_italic: false,
+                is_bold_italic: false,
+                is_bold: true,
+            }),
+            decoration: None,
+        });
+        italic_and_bold.add(Sugar {
+            content: 'l',
+            foreground_color: [0.0, 0.0, 0.0, 1.0],
+            background_color: [1.0, 1.0, 0.3, 1.0],
+            style: Some(SugarStyle {
+                is_italic: false,
+                is_bold_italic: false,
+                is_bold: true,
+            }),
+            decoration: None,
+        });
+        italic_and_bold.add(Sugar {
+            content: 'd',
+            foreground_color: [0.0, 0.0, 0.0, 1.0],
+            background_color: [1.0, 1.0, 0.3, 1.0],
+            style: Some(SugarStyle {
+                is_italic: false,
+                is_bold_italic: false,
+                is_bold: true,
+            }),
+            decoration: None,
+        });
 
-        let rio = vec![
-            Sugar {
-                content: 'r',
-                foreground_color: [1.0, 1.0, 1.0, 1.0],
-                background_color: [0.0, 0.0, 0.0, 1.0],
-                style: None,
-                decoration: Some(SugarDecoration {
-                    relative_position: (0.0, 58.),
-                    size: (1.0, 0.05),
-                    color: [0.0, 0.0, 0.0, 1.0],
-                }),
-            },
-            Sugar {
-                content: 'e',
-                foreground_color: [0.0, 0.0, 0.0, 1.0],
-                background_color: [0.0, 0.0, 1.0, 1.0],
-                style: None,
-                decoration: None,
-            },
-            Sugar {
-                content: 'g',
-                foreground_color: [1.0, 1.0, 1.0, 1.0],
-                background_color: [0.0, 0.0, 0.0, 1.0],
-                style: None,
-                decoration: None,
-            },
-            Sugar {
-                content: 'u',
-                foreground_color: [0.0, 0.0, 0.0, 1.0],
-                background_color: [1.0, 1.0, 1.0, 1.0],
-                style: None,
-                decoration: None,
-            },
-            Sugar {
-                content: 'l',
-                foreground_color: [0.0, 0.0, 0.0, 1.0],
-                background_color: [0.0, 1.0, 0.0, 1.0],
-                style: None,
-                decoration: None,
-            },
-            Sugar {
-                content: 'a',
-                foreground_color: [0.0, 0.0, 0.0, 1.0],
-                background_color: [1.0, 1.0, 0.0, 1.0],
-                style: None,
-                decoration: None,
-            },
-            Sugar {
-                content: 'r',
-                foreground_color: [0.0, 0.0, 0.0, 1.0],
-                background_color: [0.0, 1.0, 0.0, 1.0],
-                style: None,
-                decoration: None,
-            },
-        ];
+        let mut rio = SugarStack::new();
+        rio.add(Sugar {
+            content: 'r',
+            foreground_color: [1.0, 1.0, 1.0, 1.0],
+            background_color: [0.0, 0.0, 0.0, 1.0],
+            style: None,
+            decoration: Some(SugarDecoration {
+                relative_position: (0.0, 58.),
+                size: (1.0, 0.05),
+                color: [0.0, 0.0, 0.0, 1.0],
+            }),
+        });
+        rio.add(Sugar {
+            content: 'e',
+            foreground_color: [0.0, 0.0, 0.0, 1.0],
+            background_color: [0.0, 0.0, 1.0, 1.0],
+            style: None,
+            decoration: None,
+        });
+        rio.add(Sugar {
+            content: 'g',
+            foreground_color: [1.0, 1.0, 1.0, 1.0],
+            background_color: [0.0, 0.0, 0.0, 1.0],
+            style: None,
+            decoration: None,
+        });
+        rio.add(Sugar {
+            content: 'u',
+            foreground_color: [0.0, 0.0, 0.0, 1.0],
+            background_color: [1.0, 1.0, 1.0, 1.0],
+            style: None,
+            decoration: None,
+        });
+        rio.add(Sugar {
+            content: 'l',
+            foreground_color: [0.0, 0.0, 0.0, 1.0],
+            background_color: [0.0, 1.0, 0.0, 1.0],
+            style: None,
+            decoration: None,
+        });
+        rio.add(Sugar {
+            content: 'a',
+            foreground_color: [0.0, 0.0, 0.0, 1.0],
+            background_color: [1.0, 1.0, 0.0, 1.0],
+            style: None,
+            decoration: None,
+        });
+        rio.add(Sugar {
+            content: 'r',
+            foreground_color: [0.0, 0.0, 0.0, 1.0],
+            background_color: [0.0, 1.0, 0.0, 1.0],
+            style: None,
+            decoration: None,
+        });
 
-        let strike = vec![
-            Sugar {
-                content: 's',
-                foreground_color: [1.0, 1.0, 1.0, 1.0],
-                background_color: [0.0, 0.0, 0.0, 1.0],
-                style: None,
-                decoration: Some(SugarDecoration {
-                    relative_position: (0.0, 30.),
-                    size: (1.0, 0.025),
-                    color: [0.5, 0.5, 0.0, 1.0],
-                }),
-            },
-            Sugar {
-                content: 't',
-                foreground_color: [1.0, 1.0, 1.0, 1.0],
-                background_color: [0.0, 0.0, 0.0, 1.0],
-                style: None,
-                decoration: Some(SugarDecoration {
-                    relative_position: (0.0, 30.),
-                    size: (1.0, 0.025),
-                    color: [0.5, 0.5, 0.0, 1.0],
-                }),
-            },
-            Sugar {
-                content: 'r',
-                foreground_color: [1.0, 1.0, 1.0, 1.0],
-                background_color: [0.0, 0.0, 0.0, 1.0],
-                style: None,
-                decoration: Some(SugarDecoration {
-                    relative_position: (0.0, 30.),
-                    size: (1.0, 0.025),
-                    color: [0.5, 0.5, 0.0, 1.0],
-                }),
-            },
-            Sugar {
-                content: 'i',
-                foreground_color: [1.0, 1.0, 1.0, 1.0],
-                background_color: [0.0, 0.0, 0.0, 1.0],
-                style: None,
-                decoration: Some(SugarDecoration {
-                    relative_position: (0.0, 30.),
-                    size: (1.0, 0.025),
-                    color: [0.5, 0.5, 0.0, 1.0],
-                }),
-            },
-            Sugar {
-                content: 'k',
-                foreground_color: [1.0, 1.0, 1.0, 1.0],
-                background_color: [0.0, 0.0, 0.0, 1.0],
-                style: None,
-                decoration: Some(SugarDecoration {
-                    relative_position: (0.0, 30.),
-                    size: (1.0, 0.025),
-                    color: [0.5, 0.5, 0.0, 1.0],
-                }),
-            },
-            Sugar {
-                content: 'e',
-                foreground_color: [1.0, 1.0, 1.0, 1.0],
-                background_color: [0.0, 0.0, 0.0, 1.0],
-                style: None,
-                decoration: Some(SugarDecoration {
-                    relative_position: (0.0, 30.),
-                    size: (1.0, 0.025),
-                    color: [0.5, 0.5, 0.0, 1.0],
-                }),
-            },
-        ];
+        let mut strike = SugarStack::new();
+        strike.add(Sugar {
+            content: 's',
+            foreground_color: [1.0, 1.0, 1.0, 1.0],
+            background_color: [0.0, 0.0, 0.0, 1.0],
+            style: None,
+            decoration: Some(SugarDecoration {
+                relative_position: (0.0, 30.),
+                size: (1.0, 0.025),
+                color: [0.5, 0.5, 0.0, 1.0],
+            }),
+        });
+        strike.add(Sugar {
+            content: 't',
+            foreground_color: [1.0, 1.0, 1.0, 1.0],
+            background_color: [0.0, 0.0, 0.0, 1.0],
+            style: None,
+            decoration: Some(SugarDecoration {
+                relative_position: (0.0, 30.),
+                size: (1.0, 0.025),
+                color: [0.5, 0.5, 0.0, 1.0],
+            }),
+        });
+        strike.add(Sugar {
+            content: 'r',
+            foreground_color: [1.0, 1.0, 1.0, 1.0],
+            background_color: [0.0, 0.0, 0.0, 1.0],
+            style: None,
+            decoration: Some(SugarDecoration {
+                relative_position: (0.0, 30.),
+                size: (1.0, 0.025),
+                color: [0.5, 0.5, 0.0, 1.0],
+            }),
+        });
+        strike.add(Sugar {
+            content: 'i',
+            foreground_color: [1.0, 1.0, 1.0, 1.0],
+            background_color: [0.0, 0.0, 0.0, 1.0],
+            style: None,
+            decoration: Some(SugarDecoration {
+                relative_position: (0.0, 30.),
+                size: (1.0, 0.025),
+                color: [0.5, 0.5, 0.0, 1.0],
+            }),
+        });
+        strike.add(Sugar {
+            content: 'k',
+            foreground_color: [1.0, 1.0, 1.0, 1.0],
+            background_color: [0.0, 0.0, 0.0, 1.0],
+            style: None,
+            decoration: Some(SugarDecoration {
+                relative_position: (0.0, 30.),
+                size: (1.0, 0.025),
+                color: [0.5, 0.5, 0.0, 1.0],
+            }),
+        });
+        strike.add(Sugar {
+            content: 'e',
+            foreground_color: [1.0, 1.0, 1.0, 1.0],
+            background_color: [0.0, 0.0, 0.0, 1.0],
+            style: None,
+            decoration: Some(SugarDecoration {
+                relative_position: (0.0, 30.),
+                size: (1.0, 0.025),
+                color: [0.5, 0.5, 0.0, 1.0],
+            }),
+        });
 
         let block = Some(SugarDecoration {
             relative_position: (0.0, 0.0),
@@ -484,43 +481,42 @@ async fn run() {
             color: [1.0, 0.4, 1.0, 1.0],
         });
 
-        let cursors = vec![
-            Sugar {
-                content: ' ',
-                foreground_color: [0.0, 0.0, 0.0, 1.0],
-                background_color: [0.0, 1.0, 1.0, 1.0],
-                style: None,
-                decoration: block,
-            },
-            Sugar {
-                content: ' ',
-                foreground_color: [0.0, 0.0, 0.0, 1.0],
-                background_color: [0.0, 1.0, 1.0, 1.0],
-                style: None,
-                decoration: None,
-            },
-            Sugar {
-                content: ' ',
-                foreground_color: [1.0, 1.0, 1.0, 1.0],
-                background_color: [0.0, 0.0, 0.0, 1.0],
-                style: None,
-                decoration: underline,
-            },
-            Sugar {
-                content: ' ',
-                foreground_color: [0.0, 0.0, 0.0, 1.0],
-                background_color: [0.0, 1.0, 1.0, 1.0],
-                style: None,
-                decoration: None,
-            },
-            Sugar {
-                content: ' ',
-                foreground_color: [0.0, 0.0, 0.0, 1.0],
-                background_color: [0.0, 1.0, 1.0, 1.0],
-                style: None,
-                decoration: beam,
-            },
-        ];
+        let mut cursors = SugarStack::new();
+        cursors.add(Sugar {
+            content: ' ',
+            foreground_color: [0.0, 0.0, 0.0, 1.0],
+            background_color: [0.0, 1.0, 1.0, 1.0],
+            style: None,
+            decoration: block,
+        });
+        cursors.add(Sugar {
+            content: ' ',
+            foreground_color: [0.0, 0.0, 0.0, 1.0],
+            background_color: [0.0, 1.0, 1.0, 1.0],
+            style: None,
+            decoration: None,
+        });
+        cursors.add(Sugar {
+            content: ' ',
+            foreground_color: [1.0, 1.0, 1.0, 1.0],
+            background_color: [0.0, 0.0, 0.0, 1.0],
+            style: None,
+            decoration: underline,
+        });
+        cursors.add(Sugar {
+            content: ' ',
+            foreground_color: [0.0, 0.0, 0.0, 1.0],
+            background_color: [0.0, 1.0, 1.0, 1.0],
+            style: None,
+            decoration: None,
+        });
+        cursors.add(Sugar {
+            content: ' ',
+            foreground_color: [0.0, 0.0, 0.0, 1.0],
+            background_color: [0.0, 1.0, 1.0, 1.0],
+            style: None,
+            decoration: beam,
+        });
 
         match event {
             Event::Resumed => {

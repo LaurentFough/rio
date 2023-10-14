@@ -1349,7 +1349,7 @@ impl Screen {
         &mut self,
         color: ColorWGPU,
         use_image_as_background: bool,
-        background_image_opt: &Option<sugarloaf::core::ImageProperties>,
+        background_image_opt: &Option<sugarloaf::primitives::media::ImageProperties>,
     ) {
         let initial_columns = self.sugarloaf.layout.columns;
 

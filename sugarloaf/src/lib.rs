@@ -1,6 +1,6 @@
 pub mod components;
+pub mod primitives;
 pub mod context;
-pub mod core;
 pub mod font;
 pub mod glyph;
 pub mod layout;

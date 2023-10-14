@@ -15,7 +15,8 @@ use rio_config::Config;
 use std::collections::HashMap;
 use std::rc::Rc;
 use std::time::{Duration, Instant};
-use sugarloaf::core::{Sugar, SugarDecoration, SugarStack, SugarStyle};
+use sugarloaf::primitives::{Sugar, SugarStack};
+use sugarloaf::primitives::style::{SugarDecoration, SugarStyle};
 use sugarloaf::Sugarloaf;
 use winit::window::Theme;
 
@@ -219,9 +220,9 @@ impl State {
 
     #[inline]
     fn create_empty_sugar_stack_from_columns(&self, columns: usize) -> SugarStack {
-        let mut stack: Vec<Sugar> = vec![];
+        let mut stack = SugarStack::new();
         for _ in 0..columns {
-            stack.push(Sugar {
+            stack.add(Sugar {
                 content: ' ',
                 foreground_color: self.named_colors.background.0,
                 background_color: self.named_colors.background.0,
@@ -241,7 +242,7 @@ impl State {
         line: pos::Line,
         display_offset: i32,
     ) -> SugarStack {
-        let mut stack: Vec<Sugar> = vec![];
+        let mut stack = SugarStack::new();
         let columns: usize = row.len();
         for column in 0..columns {
             let line = line - display_offset;
@@ -253,7 +254,7 @@ impl State {
             }
 
             if has_cursor && column == self.cursor.state.pos.col {
-                stack.push(self.create_cursor(square));
+                stack.add(self.create_cursor(square));
             } else if is_selected {
                 let content = if square.c == '\t' || square.flags.contains(Flags::HIDDEN)
                 {
@@ -273,9 +274,9 @@ impl State {
                     style: None,
                     decoration: None,
                 };
-                stack.push(selected_sugar);
+                stack.add(selected_sugar);
             } else {
-                stack.push(self.create_sugar(square));
+                stack.add(self.create_sugar(square));
             }
 
             // Render last column and break row
@@ -385,7 +386,7 @@ impl State {
 
     #[inline]
     fn create_sugar_stack(&mut self, row: &Row<Square>, has_cursor: bool) -> SugarStack {
-        let mut stack: Vec<Sugar> = vec![];
+        let mut stack = SugarStack::new();
         let columns: usize = row.len();
         for column in 0..columns {
             let square = &row.inner[column];
@@ -395,9 +396,9 @@ impl State {
             }
 
             if has_cursor && column == self.cursor.state.pos.col {
-                stack.push(self.create_cursor(square));
+                stack.add(self.create_cursor(square));
             } else {
-                stack.push(self.create_sugar(square));
+                stack.add(self.create_sugar(square));
             }
 
             // Render last column and break row
