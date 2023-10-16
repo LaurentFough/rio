@@ -336,16 +336,16 @@ impl Sugarloaf {
                 self.text_brush.queue(&cached_section);
             }
 
-            // for rect in &cached_sugar_stack.rects {
-            //     self.rects.push(rect.to_owned());
-            // }
+            for rect in &cached_sugar_stack.rects {
+                self.rects.push(rect.to_owned());
+            }
 
             self.text_y += self.layout.scaled_sugarheight;
             return;
         }
 
         let mut compute_cache_section: Vec<OwnedSection> = vec![];
-        // let compute_cache_rect: Vec<OwnedSection> = vec![];
+        let mut compute_cache_rect: Vec<Rect> = vec![];
 
         let mut x = 0.;
         let mut sections = vec![];
@@ -481,6 +481,12 @@ impl Sugarloaf {
                 size: [width_bound * quantity as f32, self.layout.sugarheight],
             });
 
+            compute_cache_rect.push(Rect {
+                position: [scaled_rect_pos_x, scaled_rect_pos_y - self.text_y],
+                color: bg_color,
+                size: [width_bound * quantity as f32, self.layout.sugarheight],
+            });
+
             if let Some(decoration) = &stack[i].decoration {
                 let dec_pos_y = (scaled_rect_pos_y)
                     + (decoration.relative_position.1 * self.layout.line_height);
@@ -511,7 +517,7 @@ impl Sugarloaf {
         }
 
         self.sugar_stack_cache.insert(stack.id, CachedSugarStack {
-            rects: vec![],
+            rects: compute_cache_rect,
             sections: compute_cache_section,
         });
 
