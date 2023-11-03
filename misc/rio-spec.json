@@ -1,0 +1,253 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"$id": "https://github.com/LaurentFough/rio/blob/main/misc/config.toml",
+	"description": "Rio Terminal config schema - based on JSON schema draft 4 core meta-schema",
+	"type": "object",
+	"properties": {
+		"cursor": {
+			"description": "(default: ▇) Cursor glyph.",
+			"type": "string"
+		},
+		"blinking-cursor": {
+			"description": "(default: false) Whether cursor blinks or not.",
+			"type": "boolean"
+		},
+		"performance": {
+			"description": "(default: High) Set WGPU rendering performance.",
+			"type": "string"
+		},
+		"use-fork": {
+			"description": "Whether to use spawn or fork for new processes.",
+			"type": "boolean"
+		},
+		"disable-renderer-when-unfocused": {
+			"description": "Whether rio should disable renderer process while unfocused.",
+			"type": "boolean"
+		},
+		"scroll-multiplier": {
+			"description": "(default: 3.0) How many lines are scrolled each time by setting this option.",
+			"type": "number",
+			"minimum": 0
+		},
+		"ignore-selection-foreground-color": {
+			"description": "(default: false) Whether to ignore theme's selection foreground color.",
+			"type": "boolean"
+		},
+		"use-kitty-keyboard-protocol": {
+			"description": "(default: false) Enable kitty keyboard protocol.",
+			"type": "boolean"
+		},
+		"theme": {
+			"description": "(default: rio) Lets rio search for specified theme.toml in themes folder.",
+			"type": "string"
+		},
+		"padding-x": {
+			"description": "(default: 10) Define x axis padding.",
+			"type": "integer",
+			"minimum": 0
+		},
+		"option-as-alt": {
+			"description": "(Choices: both, left, right) Only works on macOS.",
+			"type": "string"
+			},
+		"window": {
+			"type": "object",
+			"propertiers": {
+				"mode": {
+					"description": "(default: Windowed; Choices: Windowed, Maximized, Fullscreen) Define how the window will be created.",
+					"type": "string"
+								},
+				"width":{
+					"description": "(default: 600) Define the initial window width.",
+					"type": "number"
+								},
+				"height":{
+					"description": "(default: 400) Define the initial window height.",
+					"type": "number",
+					"minimum": 0
+								}
+						}
+		},
+		"background": {
+			"type": "object",
+			"properties": {
+				"opacity":{
+					"description": "Changes the background transparency state.",
+					"type": "number",
+					"minimum": 0
+									},
+				"mode": {
+					"description": "(default: None; Choices: Color, Image) Set an image as background.",
+					"type": "string"
+								},
+				"image": {
+						"path": {
+							"description": "Specify absolute path to background image.",
+							"type": "string"
+						},
+						"width": {
+							"description": "Specify background image width.",
+							"type": "number",
+							"minimum": 0
+						},
+						"height": {
+							"description": "Specify background image height.",
+							"type": "number",
+							"minimum": 0
+						},
+						"x": {
+							"description": "Specify background image X-axis position.",
+							"type": "number",
+							"minimum": 0
+						},
+						"y": {
+							"description": "Specify background image Y-axis position.",
+							"type": "number",
+							"minimum": 0
+						}
+				}
+			}
+		},
+		"window-height": {
+			"description": "(default: 400) Changes the initial window height.",
+			"type": "number",
+			"minimum": 0
+		},
+		"fonts": {
+			"family": {
+				"description": "root font family, overrides separate font declarations.",
+				"type": "string"
+			},
+			"size": {
+				"description": "root font family size",
+				"type": "integer"
+			},
+			"regular": {
+				"family": {
+					"description": "regular font family name",
+					"type": "string"
+				},
+				"style": {
+					"description": "(Choices: Normal, Regular) regular font family style",
+					"type": "string"
+				},
+				"weight": {
+					"description": "regular font family weight",
+					"type": "integer"
+				}
+			},
+			"bold": {
+				"family": {
+					"description": "bold font family name",
+					"type": "string"
+				},
+				"style": {
+					"description": "(Choices: Normal, Regular) bold font family style",
+					"type": "string"
+				},
+				"weight": {
+					"description": "bold font family weight",
+					"type": "integer"
+				}
+			},
+			"italic": {
+				"family": {
+					"description": "italic font family name",
+					"type": "string"
+				},
+				"style": {
+					"description": "(Choices: Normal, Regular) italic font family style",
+					"type": "string"
+				},
+				"weight": {
+					"description": "italic font family weight",
+					"type": "integer"
+				}
+			},
+			"bold-italic": {
+				"family": {
+					"description": "bold-italic font family name",
+					"type": "string"
+				},
+				"style": {
+					"description": "(Choices: Normal, Regular) bold-italic font family style",
+					"type": "string"
+				},
+				"weight": {
+					"description": "bold-italic font family weight",
+					"type": "integer"
+				}
+			}
+		},
+		"navigation": {
+			"mode": {
+				"description": "Define Tab Navigation Mode; Choices: NativeTab (macOS Only), CollapsedTab, BottomTab, TopTab, Breadcrumb, Plain",
+				"type": "string"
+			},
+			"clickable": {
+				"description": "(default: true) Enable click on tabs to switch.",
+				"type": "boolean"
+			},
+			"use-current-path": {
+				"description": "(default: true) Use same path whenever a new tab is created.",
+				"type": "boolean"
+			},
+			"color-automation": [
+				{
+					"program": "nvim",
+					"color": "#FFFF00"
+				}
+			],
+			"macos-hide-window-buttons": {
+				"description": "(macOS only) Hide Traffic Light Buttons.",
+				"type": "boolean"
+			},
+			"shell": {
+				"program": {
+					"description": "Path to favourite shell.",
+					"type": "string"
+				},
+				"args": [
+					"--login"
+				]
+			},
+			"working-dir": {
+				"description": "Directory the shell is started in. Effective only if use-fork enabled.",
+				"type": "string"
+			},
+			"editor": {
+				"description": "Default editor.",
+				"type": "string"
+			},
+			"env-vars": [
+				"SHELL=/opt/local/bin/bash"
+			]
+		},
+		"colors": {},
+		"bindings": {
+			"keys": [
+				{
+					"key": "q",
+					"with": "super",
+					"action": "Quit"
+				},
+				{
+					"key": "home",
+					"with": "super | shift",
+					"bytes": [
+						27,
+						91,
+						53,
+						126
+					]
+				}
+			]
+		},
+		"developer": {
+			"log-level": {
+				"description": "(default: OFF) Enables the log filter.",
+				"type": "string"
+			}
+		}
+	}
+}
