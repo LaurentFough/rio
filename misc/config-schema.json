@@ -1,0 +1,192 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"$id": "https://github.com/LaurentFough/rio/blob/main/misc/config.toml",
+	"description": "Rio Terminal config schema - based on JSON schema draft 4 core meta-schema",
+	"type": "object",
+	"properties": {
+		"cursor": {
+			"type": "string",
+			"description": "(default: ▇) Cursor glyph."
+		},
+		"blinking-cursor": {
+			"type": "boolean",
+			"description": "(default: false) Whether cursor blinks or not."
+		},
+		"performance": {
+			"type": "string",
+			"description": "(default: High) Set WGPU rendering performance."
+		},
+		"use-fork": {
+			"type": "boolean",
+			"description": "Whether to use spawn or fork for new processes."
+		},
+		"disable-renderer-when-unfocused": {
+			"type": "boolean",
+			"description": "Whether rio should disable renderer process while unfocused."
+		},
+		"scroll-multiplier": {
+			"type": "number",
+			"description": "(default: 3.0) How many lines are scrolled each time by setting this option.",
+			"minimum": 0
+		},
+		"ignore-selection-foreground-color": {
+			"type": "boolean",
+			"description": "(default: false) Whether to ignore theme's selection foreground color."
+		},
+		"use-kitty-keyboard-protocol": {
+			"type": "boolean",
+			"description": "(default: false) Enable kitty keyboard protocol."
+		},
+		"theme": {
+			"type": "string",
+			"description": "(default: rio) Lets rio search for specified theme.toml in themes folder."
+		},
+		"padding-x": {
+			"type": "integer",
+			"description": "(default: 10) Define x axis padding.",
+			"minimum": 0
+		},
+		"option-as-alt": {
+			"type": "string",
+			"description": "(Choices: both, left, right) Only works on macOS."
+			},
+		"window": {
+			"mode": {
+				"type": "string",
+				"description": "(default: Windowed; Choices: Windowed, Maximized, Fullscreen) Define how the window will be created."
+			},
+			"width": {
+				"type": "number",
+				"description": "(default: 600) Define the initial window width."
+			},
+			"height": {
+				"type": "number",
+				"description": "(default: 400) Define the initial window height.",
+				"minimum": 0
+			}
+		},
+		"background": {
+			"opacity": {
+				"type": "number",
+				"description": "Changes the background transparency state.",
+				"minimum": 0
+			},
+			"mode": {
+				"type": "string",
+				"description": "(default: None; Choices: Color, Image) Set an image as background."
+			},
+			"image": {
+				"path": {
+					"type": "string",
+					"description": "Specify Absolute path to background image."
+				},
+				"width": {
+					"type": "number",
+					"description": "Specify Background image width.",
+					"minimum": 0
+				},
+				"height": {
+					"type": "number",
+					"description": "Specify Background image height.",
+					"minimum": 0
+				},
+				"x": {
+					"type": "number",
+					"description": "Specify Background image X-axis position.",
+					"minimum": 0
+				},
+				"y": {
+					"type": "number",
+					"description": "Specify Background image Y-axis position.",
+					"minimum": 0
+				}
+			}
+		},
+		"window-height": {
+			"type": "number",
+			"description": "(default: 400) Changes the initial window height.",
+			"minimum": 0
+		},
+		"fonts": {
+			"size": 16,
+			"regular": {
+				"family": "firacode",
+				"style": "normal",
+				"weight": 400
+			},
+			"bold": {
+				"family": "firacode",
+				"style": "normal",
+				"weight": 800
+			},
+			"italic": {
+				"family": "cascadiamono",
+				"style": "italic",
+				"weight": 400
+			},
+			"bold-italic": {
+				"family": "cascadiamono",
+				"style": "italic",
+				"weight": 800
+			}
+		},
+		"navigation": {
+			"mode": {
+				"type": "string",
+				"description": "Define Tab Navigation Mode; Choices: NativeTab (macOS Only), CollapsedTab, BottomTab, TopTab, Breadcrumb, Plain"
+			},
+			"clickable": {
+				"type": "boolean",
+				"description": "(default: true) Enable click on tabs to switch."
+			},
+			"use-current-path": {
+				"type": "boolean",
+				"description": "(default: true) Use same path whenever a new tab is created."
+			},
+			"color-automation": [
+				{
+					"program": "nvim",
+					"color": "#FFFF00"
+				}
+			],
+			"macos-hide-window-buttons": {
+				"type": "boolean",
+				"description": "(macOS only) Hide Window Traffic Light Buttons."
+			},
+			"shell": {
+				"program": "/opt/local/bin/bash",
+				"args": [
+					"--login"
+				]
+			},
+			"working-dir": "/Users/erichoch/",
+			"editor": "bbedit",
+			"env-vars": [
+				"SHELL=/opt/local/bin/bash"
+			]
+		},
+		"colors": {},
+		"bindings": {
+			"keys": [
+				{
+					"key": "q",
+					"with": "super",
+					"action": "Quit"
+				},
+				{
+					"key": "home",
+					"with": "super | shift",
+					"bytes": [
+						27,
+						91,
+						53,
+						126
+					]
+				}
+			]
+		},
+		"developer": {
+			"log-level": "INFO"
+		}
+	}
+}
