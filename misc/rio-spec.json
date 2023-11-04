@@ -336,7 +336,7 @@
 							"type": "string"
 					}
 			},
-			"required": [
+			"optional": [
 					"background",
 					"black",
 					"blue",
