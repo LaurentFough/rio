@@ -5,8 +5,13 @@
 	"type": "object",
 	"properties": {
 		"cursor": {
-			"description": "(default: ▇) Cursor glyph.",
-			"type": "string"
+			"description": "(default: ▇) Cursor glyph. Choices: | _ ▇.",
+			"type": "string",
+			"enum": [
+					"▇",
+					"|",
+					"_"
+			]
 		},
 		"blinking-cursor": {
 			"description": "(default: false) Whether cursor blinks or not.",
@@ -48,25 +53,35 @@
 		},
 		"option-as-alt": {
 			"description": "(Choices: both, left, right) Only works on macOS.",
-			"type": "string"
+			"type": "string",
+			"enum": [
+				"left",
+				"right",
+				"both"
+			]
 			},
 		"window": {
 			"type": "object",
 			"propertiers": {
 				"mode": {
 					"description": "(default: Windowed; Choices: Windowed, Maximized, Fullscreen) Define how the window will be created.",
-					"type": "string"
-								},
+					"type": "string",
+					"enum": [
+						"Windowed",
+						"Maximized",
+						"Fullscreen"
+					]
+					},
 				"width":{
 					"description": "(default: 600) Define the initial window width.",
 					"type": "number"
-								},
+					},
 				"height":{
 					"description": "(default: 400) Define the initial window height.",
 					"type": "number",
 					"minimum": 0
-								}
-						}
+					}
+			}
 		},
 		"background": {
 			"type": "object",
@@ -120,7 +135,7 @@
 			},
 			"size": {
 				"description": "root font family size",
-				"type": "integer"
+				"type": "number"
 			},
 			"regular": {
 				"family": {
@@ -207,9 +222,12 @@
 					"description": "Path to favourite shell.",
 					"type": "string"
 				},
-				"args": [
-					"--login"
-				]
+				"args": {
+					"description": "arguments passed directly to shell binary",
+					"items": {
+						"type": "string"
+					}
+			}
 			},
 			"working-dir": {
 				"description": "Directory the shell is started in. Effective only if use-fork enabled.",
@@ -223,7 +241,134 @@
 				"SHELL=/opt/local/bin/bash"
 			]
 		},
-		"colors": {},
+		"colors": {
+			"description": "Colors.",
+			"type": "object",
+			"properties": {
+					"background": {
+							"type": "string"
+					},
+					"black": {
+							"type": "string"
+					},
+					"blue": {
+							"type": "string"
+					},
+					"cursor": {
+						"type": "string"
+					},
+					"cyan": {
+							"type": "string"
+					},
+					"dim-black": {
+						"type": "string"
+					},
+					"dim-blue": {
+						"type": "string"
+					},
+					"dim-cyan": {
+						"type": "string"
+					},
+					"dim-foreground": {
+						"type": "string"
+					},
+					"dim-green": {
+						"type": "string"
+					},
+					"dim-magenta": {
+						"type": "string"
+					},
+					"dim-red": {
+						"type": "string"
+					},
+					"dim-white": {
+						"type": "string"
+					},
+					"dim-yellow": {
+						"type": "string"
+					},
+					"foreground": {
+						"type": "string"
+					},
+					"green": {
+							"type": "string"
+					},
+					"light-black": {
+							"type": "string"
+					},
+					"light-blue": {
+							"type": "string"
+					},
+					"light-cyan": {
+							"type": "string"
+					},
+					"light-green": {
+							"type": "string"
+					},
+					"light-magenta": {
+							"type": "string"
+					},
+					"light-red": {
+							"type": "string"
+					},
+					"light-white": {
+							"type": "string"
+					},
+					"light-yellow": {
+							"type": "string"
+					},
+					"magenta": {
+							"type": "string"
+					},
+					"red": {
+							"type": "string"
+					},
+					"tabs": {
+							"type": "string"
+					},
+					"tabs-active": {
+							"type": "string"
+					},
+					"white": {
+							"type": "string"
+					},
+					"yellow": {
+							"type": "string"
+					}
+			},
+			"required": [
+					"background",
+					"black",
+					"blue",
+					"cursor",
+					"cyan",
+					"dim-black",
+					"dim-blue",
+					"dim-cyan",
+					"dim-foreground",
+					"dim-green",
+					"dim-magenta",
+					"dim-red",
+					"dim-white",
+					"dim-yellow",
+					"foreground",
+					"green",
+					"light-black",
+					"light-blue",
+					"light-cyan",
+					"light-green",
+					"light-magenta",
+					"light-red",
+					"light-white",
+					"light-yellow",
+					"magenta",
+					"red",
+					"tabs",
+					"tabs-active",
+					"white",
+					"yellow"
+			]
+	},
 		"bindings": {
 			"keys": [
 				{
