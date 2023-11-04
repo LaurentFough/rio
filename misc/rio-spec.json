@@ -147,8 +147,8 @@
 					"type": "string"
 				},
 				"weight": {
-					"description": "regular font family weight",
-					"type": "integer"
+					"description": "bold font weight (e.g. 'normal', '400', 'bold')",
+					"$ref": "#/definitions/FontWeight"
 				}
 			},
 			"bold": {
@@ -161,8 +161,8 @@
 					"type": "string"
 				},
 				"weight": {
-					"description": "bold font family weight",
-					"type": "integer"
+					"description": "bold font weight (e.g. 'normal', '400', 'bold')",
+					"$ref": "#/definitions/FontWeight"
 				}
 			},
 			"italic": {
@@ -175,8 +175,8 @@
 					"type": "string"
 				},
 				"weight": {
-					"description": "italic font family weight",
-					"type": "integer"
+					"description": "bold font weight (e.g. 'normal', '400', 'bold')",
+					"$ref": "#/definitions/FontWeight"
 				}
 			},
 			"bold-italic": {
@@ -189,8 +189,8 @@
 					"type": "string"
 				},
 				"weight": {
-					"description": "bold-italic font family weight",
-					"type": "integer"
+					"description": "bold font weight (e.g. 'normal', '400', 'bold')",
+					"$ref": "#/definitions/FontWeight"
 				}
 			}
 		},
@@ -393,6 +393,32 @@
 				"description": "(default: OFF) Enables the log filter.",
 				"type": "string"
 			}
-		}
+		},
+    "definitions": {
+			"FontWeight": {
+					"anyOf": [
+							{
+									"enum": [
+											"100",
+											"200",
+											"300",
+											"400",
+											"500",
+											"600",
+											"700",
+											"800",
+											"900",
+											"bold",
+											"normal"
+									],
+									"type": "string"
+							},
+							{
+									"type": "number"
+							}
+					],
+					"description": "A string or number representing text font weight."
+			}
 	}
+}
 }
